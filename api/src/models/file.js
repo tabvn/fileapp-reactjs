@@ -1,7 +1,8 @@
 import _ from 'lodash'
+
 class File {
 
-    constructor(app){
+    constructor(app) {
         this.app = app;
 
         this.model = {
@@ -9,20 +10,20 @@ class File {
             originalName: null,
             mimeType: null,
             size: null,
-            created: Date.now(),
+            created: new Date(),
         }
     }
 
-    initWithObject(object){
+    initWithObject(object) {
         this.model.name = _.get(object, 'filename');
         this.model.originalName = _.get(object, 'originalname');
         this.model.mimeType = _.get(object, 'mimetype');
         this.model.size = _.get(object, 'size');
-        this.model.created = Date.now();
-
+        this.model.created = new Date();
         return this;
     }
-    toJSON(){
+
+    toJSON() {
         return this.model;
     }
 

@@ -3,16 +3,16 @@ import {version} from '../package.json'
 import _ from 'lodash'
 import File from './models/file'
 import {ObjectID} from 'mongodb'
+
 class AppRouter {
 
-    constructor(app){
+    constructor(app) {
         this.app = app;
         this.setupRouters();
     }
 
 
-
-    setupRouters(){
+    setupRouters() {
 
         const app = this.app;
         const db = app.get('db');
@@ -20,7 +20,7 @@ class AppRouter {
         const upload = app.get('upload');
 
         // root routing.
-        app.get('/', (req, res, next) =>{
+        app.get('/', (req, res, next) => {
 
             return res.status(200).json({
                 version: version
@@ -29,7 +29,7 @@ class AppRouter {
         });
 
         // Upload routing
-        app.post('/api/upload', upload.array('files'),(req, res, next) => {
+        app.post('/api/upload', upload.array('files'), (req, res, next) => {
             const files = _.get(req, 'files', []);
 
             let fileModels = [];
@@ -41,10 +41,10 @@ class AppRouter {
             });
 
 
-            if(fileModels.length){
+            if (fileModels.length) {
 
                 db.collection('files').insertMany(fileModels, (err, result) => {
-                    if(err){
+                    if (err) {
 
                         return res.status(503).json({
                             error: {
@@ -60,7 +60,7 @@ class AppRouter {
 
                 })
 
-            }else{
+            } else {
 
                 return res.status(503).json({
                     error: {message: "Files upload is required."}
@@ -73,27 +73,23 @@ class AppRouter {
         app.get('/api/download/:id', (req, res, next) => {
 
             const fileId = req.params.id;
-
-            console.log(fileId);
             db.collection('files').find({_id: ObjectID(fileId)}).toArray((err, result) => {
 
                 const fileName = _.get(result, '[0].name');
-               if(err || !fileName){
+                if (err || !fileName) {
 
-                   return res.status(404).json({
-                       error: {
-                           message: "File not found."
-                       }
-                   })
-               }
-
-
+                    return res.status(404).json({
+                        error: {
+                            message: "File not found."
+                        }
+                    })
+                }
 
                 const filePath = path.join(uploadDir, fileName);
 
                 return res.download(filePath, fileName, (err) => {
 
-                    if(err){
+                    if (err) {
 
                         return res.status(404).json({
 
@@ -101,7 +97,7 @@ class AppRouter {
                                 message: "File not found"
                             }
                         });
-                    }else{
+                    } else {
 
                         console.log("File is downloaded.");
 
@@ -111,17 +107,12 @@ class AppRouter {
             });
 
 
-
-
         });
-
-
 
 
     }
 
 }
-
 
 
 export default AppRouter;
