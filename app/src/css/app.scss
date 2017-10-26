@@ -1,0 +1,199 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,800";
+@import "reset";
+@import "variable";
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: $primary-color;
+  color: $body-text-color;
+  font-size: 13px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-layout {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @media(min-width: $screen-md) {
+    padding: 100px 50px 50px 50px;
+  }
+}
+
+.app-container {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 0 0 0;
+  .app-header {
+    padding-bottom: 30px;
+    text-align: center;
+    .app-site-info {
+      color: #FFFFFF;
+      h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 60px;
+        font-weight: 800;
+
+      }
+      .site-title {
+        margin: 20px 0 0 0;
+        padding: 0;
+        font-size: 50px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, .9);
+        @media (max-width: $screen-sm) {
+          display: none;
+        }
+      }
+      .site-slogan {
+        @media (max-width: $screen-sm) {
+          display: none;
+        }
+        margin-top: 5px;
+        padding: 0;
+        font-size: 30px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, .6);
+      }
+    }
+
+  }
+  .app-content {
+
+  }
+
+  @media (min-width: $screen-md) {
+    .app-header {
+      float: left;
+      padding-top: 100px;
+      text-align: left;
+    }
+    .app-content {
+      float: right;
+    }
+  }
+}
+
+.app-card {
+  overflow: hidden;
+  position: relative;
+  background: #FFFFFF;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  @media (min-width: $screen-sm) {
+    width: 350px;
+  }
+  .app-card-header {
+    background: rgba(243, 247, 255, 1);
+    .app-card-header-inner {
+      padding: 20px;
+    }
+  }
+  .app-card-content {
+    .app-card-content-inner {
+      padding: 20px;
+    }
+  }
+}
+
+.app-file-select-zone {
+  width: 100%;
+  display: block;
+  text-align: center;
+  label {
+    display: block;
+    width: 100%;
+    input {
+      position: fixed;
+      top: -9999px;
+    }
+  }
+  .app-upload-description {
+    font-size: 12px;
+    display: block;
+  }
+  .app-upload-icon {
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 70px;
+    height: 35px;
+    border: 1px dashed $body-text-color;
+  }
+}
+
+.app-form-item {
+  margin: 0 0 15px 0;
+  label {
+    text-transform: uppercase;
+    display: block;
+    font-weight: 400;
+    margin: 0 0 8px 0;
+  }
+  input[type='text'], textarea {
+    width: 100%;
+    border: 1px solid rgba(224, 224, 224, 1);
+    outline: 0 none;
+    padding: 8px;
+    &:focus, :active {
+      outline: 0 none;
+    }
+  }
+  textarea {
+    min-height: 50px;
+  }
+}
+
+.app-form-actions {
+  .app-button {
+    width: 100%;
+    text-align: center;
+    display: block;
+    font-weight: 800;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    background: #FFFFFF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    &.primary{
+      background: $primary-color;
+      color: #FFFFFF;
+    }
+  }
+}
+.app-files-selected{
+  max-height: 150px;
+  position: relative;
+  overflow-y: auto;
+  background: #FFFFFF;
+  position: relative;
+  margin: -20px -20px 20px -20px;
+  padding: 20px;
+  .app-files-selected-item{
+    display: flex;
+    border-bottom: 1px solid rgba(0,0,0,0.09);
+    padding: 10px 0;
+    .filename{
+      flex-grow: 1;
+    }
+    .file-action{
+
+    }
+  }
+  .app-file-remove{
+    border: 0 none;
+    padding: 3px;
+    font-size: 14px;
+    font-weight: 300;
+    background: none;
+  }
+}
+.text-uppercase{
+  text-transform: uppercase;
+}

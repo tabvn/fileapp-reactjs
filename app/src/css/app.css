@@ -1,0 +1,200 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,800";
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: #1b65f6;
+  color: #96a3bb;
+  font-size: 13px; }
+
+* {
+  box-sizing: border-box; }
+
+.app-layout {
+  max-width: 1000px;
+  margin: 0 auto; }
+  @media (min-width: 992px) {
+    .app-layout {
+      padding: 100px 50px 50px 50px; } }
+
+.app-container {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 0 0 0; }
+  .app-container .app-header {
+    padding-bottom: 30px;
+    text-align: center; }
+    .app-container .app-header .app-site-info {
+      color: #FFFFFF; }
+      .app-container .app-header .app-site-info h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 60px;
+        font-weight: 800; }
+      .app-container .app-header .app-site-info .site-title {
+        margin: 20px 0 0 0;
+        padding: 0;
+        font-size: 50px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.9); }
+        @media (max-width: 768px) {
+          .app-container .app-header .app-site-info .site-title {
+            display: none; } }
+      .app-container .app-header .app-site-info .site-slogan {
+        margin-top: 5px;
+        padding: 0;
+        font-size: 30px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.6); }
+        @media (max-width: 768px) {
+          .app-container .app-header .app-site-info .site-slogan {
+            display: none; } }
+  @media (min-width: 992px) {
+    .app-container .app-header {
+      float: left;
+      padding-top: 100px;
+      text-align: left; }
+    .app-container .app-content {
+      float: right; } }
+
+.app-card {
+  overflow: hidden;
+  position: relative;
+  background: #FFFFFF;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+  @media (min-width: 768px) {
+    .app-card {
+      width: 350px; } }
+  .app-card .app-card-header {
+    background: #f3f7ff; }
+    .app-card .app-card-header .app-card-header-inner {
+      padding: 20px; }
+  .app-card .app-card-content .app-card-content-inner {
+    padding: 20px; }
+
+.app-file-select-zone {
+  width: 100%;
+  display: block;
+  text-align: center; }
+  .app-file-select-zone label {
+    display: block;
+    width: 100%; }
+    .app-file-select-zone label input {
+      position: fixed;
+      top: -9999px; }
+  .app-file-select-zone .app-upload-description {
+    font-size: 12px;
+    display: block; }
+  .app-file-select-zone .app-upload-icon {
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 70px;
+    height: 35px;
+    border: 1px dashed #96a3bb; }
+
+.app-form-item {
+  margin: 0 0 15px 0; }
+  .app-form-item label {
+    text-transform: uppercase;
+    display: block;
+    font-weight: 400;
+    margin: 0 0 8px 0; }
+  .app-form-item input[type='text'], .app-form-item textarea {
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    outline: 0 none;
+    padding: 8px; }
+    .app-form-item input[type='text']:focus, .app-form-item input[type='text'] :active, .app-form-item textarea:focus, .app-form-item textarea :active {
+      outline: 0 none; }
+  .app-form-item textarea {
+    min-height: 50px; }
+
+.app-form-actions .app-button {
+  width: 100%;
+  text-align: center;
+  display: block;
+  font-weight: 800;
+  color: #1b65f6;
+  border: 1px solid #1b65f6;
+  background: #FFFFFF;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 10px 15px;
+  text-transform: uppercase; }
+  .app-form-actions .app-button.primary {
+    background: #1b65f6;
+    color: #FFFFFF; }
+
+.app-files-selected {
+  max-height: 150px;
+  position: relative;
+  overflow-y: auto;
+  background: #FFFFFF;
+  position: relative;
+  margin: -20px -20px 20px -20px;
+  padding: 20px; }
+  .app-files-selected .app-files-selected-item {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+    padding: 10px 0; }
+    .app-files-selected .app-files-selected-item .filename {
+      flex-grow: 1; }
+  .app-files-selected .app-file-remove {
+    border: 0 none;
+    padding: 3px;
+    font-size: 14px;
+    font-weight: 300;
+    background: none; }
+
+.text-uppercase {
+  text-transform: uppercase; }
+
+/*# sourceMappingURL=app.css.map */

@@ -1,3 +1,5 @@
 api/dist
 api/node_modules/
 api/package-lock.json
+app/node_modules
+app/package-lock.json
