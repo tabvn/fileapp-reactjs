@@ -19,3 +19,15 @@ npm install
 ### Development
 
 ``` npm run dev ```
+
+
+## Start React App
+
+``` 
+cd app 
+
+```
+
+```
+npm start
+```
