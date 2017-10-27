@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb9a2c89-b50c-4b89-b405-b3e4d153cba6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/src/router.js" afterPath="$PROJECT_DIR$/api/src/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/package.json" afterPath="$PROJECT_DIR$/app/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/components/home-form.js" afterPath="$PROJECT_DIR$/app/src/components/home-form.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/css/_variable.scss" afterPath="$PROJECT_DIR$/app/src/css/_variable.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/css/app.css" afterPath="$PROJECT_DIR$/app/src/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/css/app.css.map" afterPath="$PROJECT_DIR$/app/src/css/app.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/css/app.scss" afterPath="$PROJECT_DIR$/app/src/css/app.scss" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/api/storage/1509080038651.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/api/storage/1509080038654.jpg" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -223,18 +217,17 @@
       <option name="presentableId" value="Default" />
       <updated>1508852827925</updated>
       <workItem from="1508852831539" duration="4843000" />
-      <workItem from="1508990286915" duration="10871000" />
+      <workItem from="1508990286915" duration="10958000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15714000" />
+    <option name="totallyTimeSpent" value="15801000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="993" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
