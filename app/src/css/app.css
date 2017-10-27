@@ -138,6 +138,8 @@ body {
     width: 70px;
     height: 35px;
     border: 1px dashed #96a3bb; }
+  .app-file-select-zone.error .app-upload-icon {
+    border-color: #d0152e; }
 
 .app-form-item {
   margin: 0 0 15px 0; }
@@ -155,6 +157,8 @@ body {
       outline: 0 none; }
   .app-form-item textarea {
     min-height: 50px; }
+  .app-form-item.error input {
+    color: #d0152e; }
 
 .app-form-actions .app-button {
   width: 100%;
@@ -196,5 +200,8 @@ body {
 
 .text-uppercase {
   text-transform: uppercase; }
+
+.error {
+  color: #d0152e; }
 
 /*# sourceMappingURL=app.css.map */

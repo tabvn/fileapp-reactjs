@@ -123,6 +123,11 @@ body {
     height: 35px;
     border: 1px dashed $body-text-color;
   }
+  &.error{
+    .app-upload-icon{
+      border-color: $danger-color;
+    }
+  }
 }
 
 .app-form-item {
@@ -144,6 +149,11 @@ body {
   }
   textarea {
     min-height: 50px;
+  }
+  &.error{
+    input{
+      color: $danger-color;
+    }
   }
 }
 
@@ -196,4 +206,7 @@ body {
 }
 .text-uppercase{
   text-transform: uppercase;
+}
+.error{
+  color: $danger-color;
 }
