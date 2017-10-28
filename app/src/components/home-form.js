@@ -2,10 +2,9 @@ import React, {Component} from 'react'
 import _ from 'lodash'
 import classNames from 'classnames'
 import {upload} from '../helpers/upload'
+import PropTypes from 'prop-types'
 
-
-
-export default class HomeForm extends Component {
+class HomeForm extends Component {
 
     constructor(props) {
         super(props);
@@ -15,9 +14,9 @@ export default class HomeForm extends Component {
 
             form: {
                 files: [],
-                to: '',
-                from: '',
-                message: ''
+                to: 'friend@gmail.com',
+                from: 'me@gmail.com',
+                message: 'Hey there!'
             },
 
             errors: {
@@ -190,9 +189,17 @@ export default class HomeForm extends Component {
             if(isValid){
                 // the form is valid and ready to submit.
 
-                upload(this.state.form, (event) => {
+                const data = this.state.form;
 
-                    console.log("Upload callback of event", event);
+                if(this.props.onUploadBegin){
+
+                    this.props.onUploadBegin(data);
+                }
+                upload(data, (event) => {
+
+                    if(this.props.onUploadEvent){
+                        this.props.onUploadEvent(event);
+                    }
                 })
 
             }
@@ -254,8 +261,11 @@ export default class HomeForm extends Component {
                                 <label htmlFor={'input-file'}>
                                     <input onChange={this._onFileAdded} id={'input-file'} type="file" multiple={true}/>
                                     {
-                                        files.length ? <span className={'app-upload-description text-uppercase'}>Add more files</span> : <span><span className={'app-upload-icon'}/>
-                                            <span className={'app-upload-description'}>Drag and drop your files here.</span></span>
+                                        files.length ? <span className={'app-upload-description text-uppercase'}>Add more files</span> :
+                                            <span>
+                                                <span className={'app-upload-icon'}><i className={'icon-picture-streamline'} /> </span>
+                                                <span className={'app-upload-description'}>Drag and drop your files here.</span>
+                                            </span>
                                     }
                                 </label>
                             </div>
@@ -271,7 +281,7 @@ export default class HomeForm extends Component {
 
                             <div className={classNames('app-form-item', {'error': _.get(errors, 'from')})}>
                                 <label htmlFor={'from'}>From</label>
-                                <input onChange={this._onTextChange} name={'from'} placeholder={_.get(errors, 'from') ? _.get(errors, 'from') : 'Your email address'}
+                                <input value={_.get(form, 'from')} onChange={this._onTextChange} name={'from'} placeholder={_.get(errors, 'from') ? _.get(errors, 'from') : 'Your email address'}
                                        type={'text'} id={'from'}/>
                             </div>
 
@@ -295,3 +305,13 @@ export default class HomeForm extends Component {
         )
     }
 }
+
+
+
+HomeForm.propTypes = {
+    onUploadBegin: PropTypes.func,
+    onUploadEvent: PropTypes.func
+
+};
+
+export default HomeForm;

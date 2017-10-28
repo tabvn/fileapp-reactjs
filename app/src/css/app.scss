@@ -1,6 +1,7 @@
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,800";
 @import "reset";
 @import "variable";
+@import "font";
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -90,12 +91,19 @@ body {
   .app-card-header {
     background: rgba(243, 247, 255, 1);
     .app-card-header-inner {
-      padding: 20px;
+      padding: 10px 20px;
     }
   }
   .app-card-content {
     .app-card-content-inner {
       padding: 20px;
+    }
+  }
+  &.app-card-uploading{
+    .app-card-content {
+      .app-card-content-inner {
+        padding: 40px;
+      }
     }
   }
 }
@@ -104,6 +112,7 @@ body {
   width: 100%;
   display: block;
   text-align: center;
+  padding: 10px 0 0 0;
   label {
     display: block;
     width: 100%;
@@ -119,9 +128,17 @@ body {
   .app-upload-icon {
     display: inline-block;
     margin-bottom: 10px;
-    width: 70px;
-    height: 35px;
+    width: 60px;
+    height: 30px;
     border: 1px dashed $body-text-color;
+    position: relative;
+    i{
+      position: absolute;
+      left: 10px;
+      top: -10px;
+      background: #f3f7ff;
+      font-size: 28px;
+    }
   }
   &.error{
     .app-upload-icon{
@@ -143,6 +160,9 @@ body {
     border: 1px solid rgba(224, 224, 224, 1);
     outline: 0 none;
     padding: 8px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
     &:focus, :active {
       outline: 0 none;
     }
@@ -183,7 +203,7 @@ body {
   overflow-y: auto;
   background: #FFFFFF;
   position: relative;
-  margin: -20px -20px 20px -20px;
+  margin: -20px -20px 0 -20px;
   padding: 20px;
   .app-files-selected-item{
     display: flex;
@@ -209,4 +229,59 @@ body {
 }
 .error{
   color: $danger-color;
+}
+.app-home-uploading-icon{
+  display: block;
+  text-align: center;
+  i{
+    font-size: 60px;
+    display: inline-block;
+    border: 1px solid $body-text-color;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    line-height: 100px;
+  }
+  h2{
+    margin: 20px 0 0 0;
+    padding: 0;
+    font-size: 17px;
+  }
+}
+.app-upload-files-total{
+  margin-top: 20px;
+}
+.app-upload-stats{
+
+  display: flex;
+  flex-direction: row;
+  .app-upload-stats-left{
+    flex-grow: 1;
+  }
+  .app-upload-stats-right{
+
+  }
+}
+.app-progress{
+  background: rgba(241,248,254,1);
+  border: 1px solid rgba(178,216,248,1);
+  height: 15px;
+  line-height: 15px;
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px 0 10px 0;
+  position: relative;
+  overflow: hidden;
+  .app-progress-bar{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    height: 15px;
+    line-height: 15px;
+    background: $primary-color;
+  }
+}
+.app-upload-cancel-button{
+  margin-top: 50px;
 }

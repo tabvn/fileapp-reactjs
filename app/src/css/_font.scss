@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "fileapp";
+  src:url("fonts/fileapp.eot");
+  src:url("fonts/fileapp.eot?#iefix") format("embedded-opentype"),
+  url("fonts/fileapp.woff") format("woff"),
+  url("fonts/fileapp.ttf") format("truetype"),
+  url("fonts/fileapp.svg#fileapp") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "fileapp" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "fileapp" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-paper-plane:before {
+  content: "\61";
+}
+.icon-mouse-pointer:before {
+  content: "\63";
+}
+.icon-upload-cloud:before {
+  content: "\62";
+}
+.icon-download:before {
+  content: "\64";
+}
+.icon-upload:before {
+  content: "\65";
+}
+.icon-picture-streamline:before {
+  content: "\67";
+}
