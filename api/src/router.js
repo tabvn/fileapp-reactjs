@@ -55,7 +55,6 @@ class AppRouter {
                     }
 
 
-
                     console.log("user request via api/upload with data", req.body, result);
 
 
@@ -73,14 +72,12 @@ class AppRouter {
                     db.collection('posts').insertOne(post, (err, result) => {
 
 
-                        if(err){
+                        if (err) {
                             return res.status(503).json({error: {message: "Your upload could not be saved."}});
                         }
                         return res.json(post);
 
                     });
-
-
 
 
                 });
@@ -112,7 +109,7 @@ class AppRouter {
 
                 const filePath = path.join(uploadDir, fileName);
 
-                return res.download(filePath, fileName, (err) => {
+                return res.download(filePath, _.get(result, '[0].originalName'), (err) => {
 
                     if (err) {
 
@@ -130,6 +127,49 @@ class AppRouter {
 
                 });
             });
+
+
+        });
+
+
+        // routing for post detail /api/posts/:id
+
+        app.get('/api/posts/:id', (req, res, next) => {
+
+            const postId = _.get(req, 'params.id');
+            let postObjectId = null;
+            try {
+                postObjectId = new ObjectID(postId);
+            }
+            catch (err) {
+
+                return res.status(404).json({error: {message: 'File not found.'}});
+
+            }
+
+            db.collection('posts').find({_id: postObjectId}).limit(1).toArray((err, results) => {
+                let result = _.get(results, '[0]');
+
+                if(err || !result){
+                    return res.status(404).json({error: {message: 'File not found.'}});
+                }
+
+                const fileIds = _.get(result, 'files', []);
+
+                db.collection('files').find({_id: {$in: fileIds}}).toArray((err, files) => {
+
+                    if(err || !files || !files.length){
+                        return res.status(404).json({error: {message: 'File not found.'}});
+                    }
+
+                    result.files = files;
+
+                    return res.json(result);
+
+                });
+
+
+            })
 
 
         });

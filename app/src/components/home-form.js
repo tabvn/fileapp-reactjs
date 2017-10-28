@@ -288,7 +288,7 @@ class HomeForm extends Component {
 
                             <div className={'app-form-item'}>
                                 <label htmlFor={'message'}>Message</label>
-                                <textarea onChange={this._onTextChange} placeholder={'Add a note (optional)'}
+                                <textarea value={_.get(form, 'message', '')} onChange={this._onTextChange} placeholder={'Add a note (optional)'}
                                           id={'message'} name={'message'}/>
                             </div>
 

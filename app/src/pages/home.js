@@ -1,10 +1,13 @@
-import React,{Component} from 'react'
+import React, {Component} from 'react'
 import Header from '../components/header'
 import HomeForm from "../components/home-form";
 import HomeUploading from '../components/home-uploading'
-class Home extends Component{
+import HomeUploadSent from '../components/home-upload-sent'
+import _ from 'lodash'
 
-    constructor(props){
+class Home extends Component {
+
+    constructor(props) {
 
         super(props);
 
@@ -20,22 +23,48 @@ class Home extends Component{
     }
 
 
-    _renderComponent(){
+    _renderComponent() {
 
         const {componentName, data, uploadEvent} = this.state;
 
-        switch (componentName){
+        switch (componentName) {
 
             case 'HomeUploading':
 
-                return <HomeUploading event={uploadEvent} data={data} />
+                return <HomeUploading event={uploadEvent} data={data}/>
+
+
+            case 'HomeUploadSent':
+
+
+                return (
+                    <HomeUploadSent onSendAnotherFile={() => {
+
+                        this.setState({
+                            componentName: 'HomeForm'
+                        })
+
+                    }} data={data}/>
+                );
 
 
             default:
                 return <HomeForm
                     onUploadEvent={(event) => {
 
-                        this.setState({uploadEvent: event});
+                        let data = this.state.data;
+
+                        if(_.get(event, 'type') === 'success'){
+
+                            data = _.get(event, 'payload');
+                        }
+                        this.setState(
+                            {
+                                data: data,
+                                uploadEvent: event,
+                                componentName: (_.get(event, 'type') === 'success') ? 'HomeUploadSent': this.state.componentName,
+                            }
+                        );
                     }}
                     onUploadBegin={(data) => {
 
@@ -44,10 +73,11 @@ class Home extends Component{
                             componentName: 'HomeUploading',
                         });
 
-                }} />
+                    }}/>
                 return
         }
     }
+
     render() {
 
         return (

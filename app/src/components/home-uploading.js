@@ -36,7 +36,7 @@ class HomeUploading extends Component{
     componentWillReceiveProps(nextProps) {
         const {event} = nextProps;
 
-        
+
 
         switch (_.get(event, 'type')){
 

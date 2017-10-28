@@ -9,7 +9,9 @@ body {
   color: $body-text-color;
   font-size: 13px;
 }
-
+a{
+  color: $primary-color;
+}
 * {
   box-sizing: border-box;
 }
@@ -99,7 +101,7 @@ body {
       padding: 20px;
     }
   }
-  &.app-card-uploading{
+  &.app-card-uploading, &.app-card-upload-sent {
     .app-card-content {
       .app-card-content-inner {
         padding: 40px;
@@ -132,7 +134,7 @@ body {
     height: 30px;
     border: 1px dashed $body-text-color;
     position: relative;
-    i{
+    i {
       position: absolute;
       left: 10px;
       top: -10px;
@@ -140,8 +142,8 @@ body {
       font-size: 28px;
     }
   }
-  &.error{
-    .app-upload-icon{
+  &.error {
+    .app-upload-icon {
       border-color: $danger-color;
     }
   }
@@ -170,8 +172,8 @@ body {
   textarea {
     min-height: 50px;
   }
-  &.error{
-    input{
+  &.error {
+    input {
       color: $danger-color;
     }
   }
@@ -191,13 +193,14 @@ body {
     border-radius: 5px;
     padding: 10px 15px;
     text-transform: uppercase;
-    &.primary{
+    &.primary {
       background: $primary-color;
       color: #FFFFFF;
     }
   }
 }
-.app-files-selected{
+
+.app-files-selected {
   max-height: 150px;
   position: relative;
   overflow-y: auto;
@@ -205,18 +208,18 @@ body {
   position: relative;
   margin: -20px -20px 0 -20px;
   padding: 20px;
-  .app-files-selected-item{
+  .app-files-selected-item {
     display: flex;
-    border-bottom: 1px solid rgba(0,0,0,0.09);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.09);
     padding: 10px 0;
-    .filename{
+    .filename {
       flex-grow: 1;
     }
-    .file-action{
+    .file-action {
 
     }
   }
-  .app-file-remove{
+  .app-file-remove {
     border: 0 none;
     padding: 3px;
     font-size: 14px;
@@ -224,16 +227,19 @@ body {
     background: none;
   }
 }
-.text-uppercase{
+
+.text-uppercase {
   text-transform: uppercase;
 }
-.error{
+
+.error {
   color: $danger-color;
 }
-.app-home-uploading-icon{
+
+.app-home-uploading-icon {
   display: block;
   text-align: center;
-  i{
+  i {
     font-size: 60px;
     display: inline-block;
     border: 1px solid $body-text-color;
@@ -242,29 +248,46 @@ body {
     border-radius: 50%;
     line-height: 100px;
   }
-  h2{
+  h2 {
     margin: 20px 0 0 0;
     padding: 0;
     font-size: 17px;
   }
 }
-.app-upload-files-total{
+
+.app-home-upload-sent-icon {
+  display: block;
+  text-align: center;
+  i {
+    font-size: 50px;
+    display: inline-block;
+    border: 1px solid $body-text-color;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    line-height: 100px;
+  }
+}
+
+.app-upload-files-total {
   margin-top: 20px;
 }
-.app-upload-stats{
+
+.app-upload-stats {
 
   display: flex;
   flex-direction: row;
-  .app-upload-stats-left{
+  .app-upload-stats-left {
     flex-grow: 1;
   }
-  .app-upload-stats-right{
+  .app-upload-stats-right {
 
   }
 }
-.app-progress{
-  background: rgba(241,248,254,1);
-  border: 1px solid rgba(178,216,248,1);
+
+.app-progress {
+  background: rgba(241, 248, 254, 1);
+  border: 1px solid rgba(178, 216, 248, 1);
   height: 15px;
   line-height: 15px;
   width: 100%;
@@ -272,7 +295,7 @@ body {
   margin: 10px 0 10px 0;
   position: relative;
   overflow: hidden;
-  .app-progress-bar{
+  .app-progress-bar {
     display: block;
     position: absolute;
     left: 0;
@@ -282,6 +305,125 @@ body {
     background: $primary-color;
   }
 }
-.app-upload-cancel-button{
+
+.app-upload-cancel-button {
   margin-top: 50px;
+}
+
+.app-text-center {
+  text-align: center;
+}
+
+.app-upload-sent-message {
+  h2 {
+    font-size: 25px;
+    font-weight: 400;
+    padding: 0;
+    margin: 20px 0;
+  }
+  p {
+    line-height: 1.5em;
+  }
+}
+
+.app-upload-sent-actions {
+  margin: 20px 0;
+  button {
+    margin: 10px 0;
+  }
+}
+
+.app-page-download {
+  .app-card {
+    @media(min-width: $screen-sm) {
+      width: 400px;
+    }
+    margin: 0 auto;
+  }
+}
+
+.app-top-header {
+  text-align: center;
+  color: #FFFFFF;
+  h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+    font-weight: 800;
+  }
+  margin-bottom: 20px;
+}
+
+.app-download-icon {
+  text-align: center;
+  i {
+    font-size: 50px;
+    color: $body-text-color;
+    display: inline-block;
+    border: 1px solid $body-text-color;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
+}
+
+.app-download-message {
+  margin-top: 30px;
+  h2 {
+    font-size: 20px;
+    margin: 20px 0;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      padding: 0 0 0 10px;
+      margin: 0 10px 0 0;
+      display: inline-block;
+      position: relative;
+      &:before {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        display: block;
+        content: ' ';
+        width: 4px;
+        height: 4px;
+        background: $body-text-color;
+        border-radius: 50%;
+      }
+      &:first-child{
+        padding: 0;
+        &:before{
+          display: none;
+        }
+      }
+    }
+  }
+}
+.app-download-file-list{
+  margin: 30px 0;
+  .app-download-file-list-item{
+    border-bottom: 1px solid rgba(227,234,248,1);
+    padding: 10px 5px;
+    display: flex;
+    .filename{
+      flex-grow: 1;
+    }
+    .download-action{
+      a{
+        color: $primary-color;
+        text-decoration: none;
+      }
+    }
+  }
+}
+.app-download-actions{
+  button{
+    margin: 10px 0;
+  }
 }

@@ -94,11 +94,17 @@ table {
 .icon-picture-streamline:before {
   content: "\67"; }
 
+.icon-paperplane:before {
+  content: "\66"; }
+
 body {
   font-family: 'Open Sans', sans-serif;
   background: #1b65f6;
   color: #96a3bb;
   font-size: 13px; }
+
+a {
+  color: #1b65f6; }
 
 * {
   box-sizing: border-box; }
@@ -166,7 +172,7 @@ body {
       padding: 10px 20px; }
   .app-card .app-card-content .app-card-content-inner {
     padding: 20px; }
-  .app-card.app-card-uploading .app-card-content .app-card-content-inner {
+  .app-card.app-card-uploading .app-card-content .app-card-content-inner, .app-card.app-card-upload-sent .app-card-content .app-card-content-inner {
     padding: 40px; }
 
 .app-file-select-zone {
@@ -281,6 +287,18 @@ body {
     padding: 0;
     font-size: 17px; }
 
+.app-home-upload-sent-icon {
+  display: block;
+  text-align: center; }
+  .app-home-upload-sent-icon i {
+    font-size: 50px;
+    display: inline-block;
+    border: 1px solid #96a3bb;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    line-height: 100px; }
+
 .app-upload-files-total {
   margin-top: 20px; }
 
@@ -311,5 +329,95 @@ body {
 
 .app-upload-cancel-button {
   margin-top: 50px; }
+
+.app-text-center {
+  text-align: center; }
+
+.app-upload-sent-message h2 {
+  font-size: 25px;
+  font-weight: 400;
+  padding: 0;
+  margin: 20px 0; }
+.app-upload-sent-message p {
+  line-height: 1.5em; }
+
+.app-upload-sent-actions {
+  margin: 20px 0; }
+  .app-upload-sent-actions button {
+    margin: 10px 0; }
+
+.app-page-download .app-card {
+  margin: 0 auto; }
+  @media (min-width: 768px) {
+    .app-page-download .app-card {
+      width: 400px; } }
+
+.app-top-header {
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 20px; }
+  .app-top-header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+    font-weight: 800; }
+
+.app-download-icon {
+  text-align: center; }
+  .app-download-icon i {
+    font-size: 50px;
+    color: #96a3bb;
+    display: inline-block;
+    border: 1px solid #96a3bb;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%; }
+
+.app-download-message {
+  margin-top: 30px; }
+  .app-download-message h2 {
+    font-size: 20px;
+    margin: 20px 0; }
+  .app-download-message ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .app-download-message ul li {
+      padding: 0 0 0 10px;
+      margin: 0 10px 0 0;
+      display: inline-block;
+      position: relative; }
+      .app-download-message ul li:before {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        display: block;
+        content: ' ';
+        width: 4px;
+        height: 4px;
+        background: #96a3bb;
+        border-radius: 50%; }
+      .app-download-message ul li:first-child {
+        padding: 0; }
+        .app-download-message ul li:first-child:before {
+          display: none; }
+
+.app-download-file-list {
+  margin: 30px 0; }
+  .app-download-file-list .app-download-file-list-item {
+    border-bottom: 1px solid #e3eaf8;
+    padding: 10px 5px;
+    display: flex; }
+    .app-download-file-list .app-download-file-list-item .filename {
+      flex-grow: 1; }
+    .app-download-file-list .app-download-file-list-item .download-action a {
+      color: #1b65f6;
+      text-decoration: none; }
+
+.app-download-actions button {
+  margin: 10px 0; }
 
 /*# sourceMappingURL=app.css.map */
