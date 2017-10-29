@@ -20,7 +20,7 @@ class AppRouter {
         const app = this.app;
         const db = app.get('db');
         const uploadDir = app.get('storageDir');
-        const upload = app.get('upload');
+        const upload = app.upload;
 
         // root routing.
         app.get('/', (req, res, next) => {
@@ -35,6 +35,8 @@ class AppRouter {
         app.post('/api/upload', upload.array('files'), (req, res, next) => {
             const files = _.get(req, 'files', []);
 
+
+            console.log("files objects from s3 multer", files);
             let fileModels = [];
 
 
@@ -55,7 +57,6 @@ class AppRouter {
                             }
                         });
                     }
-
 
 
                     let post = new Post(app).initWithObject({
@@ -152,8 +153,8 @@ class AppRouter {
             this.getPostById(postId, (err, result) => {
 
 
-                if(err){
-                    return res.status(404).json({error:{message: 'File not found.'}});
+                if (err) {
+                    return res.status(404).json({error: {message: 'File not found.'}});
                 }
 
                 return res.json(result);
@@ -170,8 +171,8 @@ class AppRouter {
 
             this.getPostById(id, (err, result) => {
 
-                if(err){
-                    return res.status(404).json({error:{message: 'File not found.'}});
+                if (err) {
+                    return res.status(404).json({error: {message: 'File not found.'}});
                 }
 
                 const files = _.get(result, 'files', []);
@@ -185,10 +186,11 @@ class AppRouter {
     }
 
 
-    getPostById(id, callback = () => {}){
+    getPostById(id, callback = () => {
+    }) {
 
 
-        const app =this.app;
+        const app = this.app;
 
         const db = app.get('db');
 
@@ -199,14 +201,14 @@ class AppRouter {
         }
         catch (err) {
 
-           return callback(err,null);
+            return callback(err, null);
 
         }
 
         db.collection('posts').find({_id: postObjectId}).limit(1).toArray((err, results) => {
             let result = _.get(results, '[0]');
 
-            if(err || !result){
+            if (err || !result) {
                 return callback(err ? err : new Error("File not found."));
             }
 
@@ -214,7 +216,7 @@ class AppRouter {
 
             db.collection('files').find({_id: {$in: fileIds}}).toArray((err, files) => {
 
-                if(err || !files || !files.length){
+                if (err || !files || !files.length) {
                     return callback(err ? err : new Error("File not found."));
                 }
 

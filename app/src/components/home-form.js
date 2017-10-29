@@ -14,9 +14,9 @@ class HomeForm extends Component {
 
             form: {
                 files: [],
-                to: '',
-                from: '',
-                message: ''
+                to: 'toan@tabvn.com',
+                from: 'dinhtoan.vn@gmail.com',
+                message: 'Hey Toan'
             },
 
             errors: {

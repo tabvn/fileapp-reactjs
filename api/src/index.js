@@ -9,7 +9,20 @@ import path from 'path';
 import {connect} from "./database";
 import AppRouter from './router'
 import nodemailer from 'nodemailer'
-import {smtp} from './config'
+import {smtp, s3Config, s3Region,s3Bucket} from './config'
+
+// Amazon S3 Setup
+import AWS from 'aws-sdk'
+import multerS3 from 'multer-s3'
+
+
+AWS.config.update(s3Config);
+
+AWS.config.region = s3Region ;
+
+const s3 = new AWS.S3();
+
+
 
 // Setup Email
 
@@ -20,16 +33,24 @@ let email = nodemailer.createTransport(smtp);
 
 const storageDir = path.join(__dirname, '..', 'storage');
 
-const storageConfig = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, storageDir)
-    },
-    filename:  (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
-    }
-});
 
-const upload = multer({ storage: storageConfig });
+//const upload = multer({ storage: storageConfig }); // local upload.
+
+const upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: s3Bucket,
+        metadata: function (req, file, cb) {
+            cb(null, {fieldName: file.fieldname});
+        },
+        key: function (req, file, cb) {
+            const filename = `${Date.now().toString()}-${file.originalname}`;
+            cb(null, filename)
+        }
+    })
+})
+
+
 
 // End file storage config
 
@@ -52,7 +73,7 @@ app.use(bodyParser.json({
 
 app.set('root', __dirname);
 app.set('storageDir', storageDir);
-app.set('upload', upload);
+app.upload = upload;
 app.email = email;
 
 //Connect to the database.
