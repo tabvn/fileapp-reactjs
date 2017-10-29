@@ -8,6 +8,12 @@ import path from 'path';
 
 import {connect} from "./database";
 import AppRouter from './router'
+import nodemailer from 'nodemailer'
+import {smtp} from './config'
+
+// Setup Email
+
+let email = nodemailer.createTransport(smtp);
 
 
 // File storage config
@@ -47,7 +53,7 @@ app.use(bodyParser.json({
 app.set('root', __dirname);
 app.set('storageDir', storageDir);
 app.set('upload', upload);
-
+app.email = email;
 
 //Connect to the database.
 

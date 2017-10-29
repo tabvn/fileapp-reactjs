@@ -14,9 +14,9 @@ class HomeForm extends Component {
 
             form: {
                 files: [],
-                to: 'friend@gmail.com',
-                from: 'me@gmail.com',
-                message: 'Hey there!'
+                to: '',
+                from: '',
+                message: ''
             },
 
             errors: {
