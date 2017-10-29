@@ -1,4 +1,5 @@
 api/dist
+api/src/s3-config.json
 api/node_modules/
 api/package-lock.json
 app/node_modules
