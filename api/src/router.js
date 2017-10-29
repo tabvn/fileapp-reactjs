@@ -4,6 +4,8 @@ import _ from 'lodash'
 import File from './models/file'
 import Post from './models/post'
 import {ObjectID} from 'mongodb'
+import FileArchiver from './archiver'
+
 
 class AppRouter {
 
@@ -137,44 +139,85 @@ class AppRouter {
         app.get('/api/posts/:id', (req, res, next) => {
 
             const postId = _.get(req, 'params.id');
-            let postObjectId = null;
-            try {
-                postObjectId = new ObjectID(postId);
-            }
-            catch (err) {
 
-                return res.status(404).json({error: {message: 'File not found.'}});
+            this.getPostById(postId, (err, result) => {
 
-            }
 
-            db.collection('posts').find({_id: postObjectId}).limit(1).toArray((err, results) => {
-                let result = _.get(results, '[0]');
-
-                if(err || !result){
-                    return res.status(404).json({error: {message: 'File not found.'}});
+                if(err){
+                    return res.status(404).json({error:{message: 'File not found.'}});
                 }
 
-                const fileIds = _.get(result, 'files', []);
-
-                db.collection('files').find({_id: {$in: fileIds}}).toArray((err, files) => {
-
-                    if(err || !files || !files.length){
-                        return res.status(404).json({error: {message: 'File not found.'}});
-                    }
-
-                    result.files = files;
-
-                    return res.json(result);
-
-                });
-
-
+                return res.json(result);
             })
 
 
         });
 
+        // Routing download zip files.
+        app.get('/api/posts/:id/download', (req, res, next) => {
 
+            const id = _.get(req, 'params.id', null);
+
+
+            this.getPostById(id, (err, result) => {
+
+                if(err){
+                    return res.status(404).json({error:{message: 'File not found.'}});
+                }
+
+                const files = _.get(result, 'files', []);
+                const archiver = new FileArchiver(app, files, res).download();
+                return archiver;
+
+            })
+        });
+
+
+    }
+
+
+    getPostById(id, callback = () => {}){
+
+
+        const app =this.app;
+
+        const db = app.get('db');
+
+
+        let postObjectId = null;
+        try {
+            postObjectId = new ObjectID(id);
+        }
+        catch (err) {
+
+           return callback(err,null);
+
+        }
+
+        db.collection('posts').find({_id: postObjectId}).limit(1).toArray((err, results) => {
+            let result = _.get(results, '[0]');
+
+            if(err || !result){
+                return callback(err ? err : new Error("File not found."));
+            }
+
+            const fileIds = _.get(result, 'files', []);
+
+            db.collection('files').find({_id: {$in: fileIds}}).toArray((err, files) => {
+
+                if(err || !files || !files.length){
+                    return callback(err ? err : new Error("File not found."));
+                }
+
+                result.files = files;
+
+
+                return callback(null, result);
+
+            });
+
+
+        })
     }
 
 }

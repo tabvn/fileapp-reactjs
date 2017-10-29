@@ -104,7 +104,8 @@ body {
   font-size: 13px; }
 
 a {
-  color: #1b65f6; }
+  color: #1b65f6;
+  text-decoration: none; }
 
 * {
   box-sizing: border-box; }
@@ -419,5 +420,8 @@ a {
 
 .app-download-actions button {
   margin: 10px 0; }
+
+.app-top-header h1 {
+  cursor: pointer; }
 
 /*# sourceMappingURL=app.css.map */

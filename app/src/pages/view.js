@@ -3,6 +3,7 @@ import _ from 'lodash'
 import {getDownloadInfo} from "../helpers/download";
 import {apiUrl} from "../config";
 import {betterNumber} from "../helpers";
+import {history} from "../history";
 
 class View extends Component {
 
@@ -55,11 +56,15 @@ class View extends Component {
 
         const files = _.get(post, 'files', []);
         const totalSize = this.getTotalDownloadSize();
-
+        const postId = _.get(post, '_id', null);
         return (
             <div className={'app-page-download'}>
                 <div className={'app-top-header'}>
-                    <h1><i className={'icon-paper-plane'} /> SHARE</h1>
+                    <h1 onClick={() => {
+
+                        history.push('/')
+
+                    }}><i className={'icon-paper-plane'} /> SHARE</h1>
                 </div>
                 <div className={'app-card app-card-download'}>
 
@@ -94,7 +99,7 @@ class View extends Component {
 
                             <div className={'app-download-actions app-form-actions'}>
 
-                                <button className={'app-button primary'} type={'button'}>Download All</button>
+                                <a href={`${apiUrl}/posts/${postId}/download`} className={'app-button primary'}>Download All</a>
                                 <button className={'app-button'} type={'button'}>Share</button>
                             </div>
                         </div>
