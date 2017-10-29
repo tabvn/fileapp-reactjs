@@ -35,7 +35,7 @@ class AppRouter {
         app.post('/api/upload', upload.array('files'), (req, res, next) => {
             const files = _.get(req, 'files', []);
 
-            
+
             let fileModels = [];
 
 
