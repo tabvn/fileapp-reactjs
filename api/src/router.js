@@ -6,6 +6,7 @@ import Post from './models/post'
 import {ObjectID} from 'mongodb'
 import FileArchiver from './archiver'
 import Email from './email'
+import S3 from './s3'
 
 class AppRouter {
 
@@ -118,7 +119,28 @@ class AppRouter {
                     })
                 }
 
-                const filePath = path.join(uploadDir, fileName);
+
+                // Download file from S3 service
+                const file = _.get(result, '[0]');
+                const downloader = new S3(app, res);
+
+
+                // return downloader.download(file); Proxy download from s3 service
+
+                // Download Directly from S3
+
+
+                const downloadUrl = downloader.getDownloadUrl(file);
+
+                return res.redirect(downloadUrl);
+
+
+
+
+
+
+
+                /*const filePath = path.join(uploadDir, fileName);
 
                 return res.download(filePath, _.get(result, '[0].originalName'), (err) => {
 
@@ -136,7 +158,10 @@ class AppRouter {
 
                     }
 
-                });
+                });*/
+
+
+
             });
 
 
