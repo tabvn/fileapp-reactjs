@@ -244,6 +244,10 @@ a {
   .app-form-actions .app-button.primary {
     background: #1b65f6;
     color: #FFFFFF; }
+  .app-form-actions .app-button.app-button-link {
+    background: none;
+    border: 0 none;
+    color: #1b65f6; }
 
 .app-files-selected {
   max-height: 150px;

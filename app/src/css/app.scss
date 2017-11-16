@@ -198,6 +198,11 @@ a{
       background: $primary-color;
       color: #FFFFFF;
     }
+    &.app-button-link{
+      background: none;
+      border: 0 none;
+      color: $primary-color;
+    }
   }
 }
 
