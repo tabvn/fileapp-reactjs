@@ -1,4 +1,8 @@
 import React, {Component} from 'react'
+import classNames from 'classnames'
+import _ from 'lodash'
+import {isEmail} from '../helpers/email'
+
 
 export default class LoginForm extends Component{
 
@@ -12,22 +16,167 @@ export default class LoginForm extends Component{
 				email: "",
 				password: "",
 				confirmPassword: ""
+			},
+
+			error: {
+				name: null,
+				email: null,
+				password: null,
+				confirmPassword: null,
 			}
 		}
 
 
 		this._onSubmit = this._onSubmit.bind(this)
 		this._onTextFieldChange = this._onTextFieldChange.bind(this);
+		this._formValidation = this._formValidation.bind(this)
 	}
 
+	_formValidation(fieldsToValidate = [], callback = () => {}){
+		const {isLogin, user} = this.state;
 
+		const allFields = {
+
+			name: {
+				message: "Your name is required.",
+				doValidate: () => {
+					const value = _.trim(_.get(user, 'name', ""));
+
+				
+					if(value.length > 0){
+						return true;
+					}
+
+					return false;
+				}
+			},
+
+			email: {
+				message: "Email is not correct",
+				doValidate: () => {
+
+					const value = _.get(user, 'email', '');
+
+					if(value.length >0 && isEmail(value)){
+
+						return true;
+					}
+					return false;
+				}
+			},
+
+			password: {
+				message: "Password shoud has more than 3 characters.",
+				doValidate: () => {
+
+
+					const value = _.get(user, 'password', '');
+
+
+					if(value && value.length > 3){
+
+							return true;
+					}
+
+					return false;
+
+				}
+			},
+
+			confirmPassword: {
+				message: "Password does not match.",
+				doValidate: () => {
+
+
+					const passwordValue = _.get(user, 'password');
+					const value = _.get(user, 'confirmPassword', '');
+
+
+					if(passwordValue === value){
+							return true;
+					}
+
+					return false;
+
+				}
+			}
+
+		};
+
+
+
+		let errors = this.state.error;
+
+		_.each(fieldsToValidate, (field) => {
+
+				const fieldValidate = _.get(allFields, field);
+				if(fieldValidate){
+
+					errors[field] = null;
+
+					const isFieldValid = fieldValidate.doValidate();
+
+					if(isFieldValid === false){
+						errors[field] = _.get(fieldValidate, 'message');
+					}
+				}
+
+		});
+
+
+
+		this.setState({
+			error: errors,
+		}, () => {
+		
+			console.log("After processed validation the form errors", errors);
+
+			let isValid = true;
+
+			_.each(errors, (err) => {
+
+				if(err){
+					isValid = false;
+
+				}
+			});
+
+			callback(isValid);
+
+		})
+
+		
+
+	}
 	_onSubmit(event){
 
 		const {isLogin,user} = this.state; 
 		event.preventDefault();
 
 
-		console.log("FOrm is submitted as: ", isLogin  ? "Login" : "Register", 'data:', user);
+		let fieldNeedToValidate = ['email', 'password'];
+
+		if(!isLogin){
+
+			fieldNeedToValidate = ['name', 'email', 'password', 'confirmPassword'];
+		}
+
+
+		this._formValidation(fieldNeedToValidate,(isValid) => {
+
+
+				console.log("The form is validated? ", isValid);
+
+
+				if(isValid){
+
+					// do send this data to backend.
+				}
+				//console.log("FOrm is submitted as: ", isLogin  ? "Login" : "Register", 'data:', user);
+
+		});
+
+		
 	}
 
 	_onTextFieldChange(e){
@@ -48,7 +197,7 @@ export default class LoginForm extends Component{
 	}
 	render(){
 
-		const {isLogin, user} = this.state;
+		const {isLogin, user, error} = this.state;
 
 		const title = isLogin ? 'Sign In' : 'Sign Up'
 		return (
@@ -69,17 +218,17 @@ export default class LoginForm extends Component{
 									!isLogin ? <div>
 										
 
-										<div className="app-form-item">
+										<div className={classNames('app-form-item', {'error': _.get(error, 'name')})}>
 											<label htmlFor="name-id">Name</label>
 											<input value={user.name} onChange={this._onTextFieldChange} placeholder="Your name" id="name-id" type="text" name="name" />
 										</div>
 									</div>: null
 								}
-								<div className="app-form-item">
+								<div className={classNames('app-form-item', {'error': _.get(error, 'email')})}>
 									<label htmlFor="email-id">Email</label>
 									<input value={user.email} onChange={this._onTextFieldChange} placeholder="Your email address" id="email-id" type="email" name="email" />
 								</div>
-								<div className="app-form-item">
+								<div className={classNames('app-form-item', {'error': _.get(error, 'password')})}>
 									<label htmlFor="password-id">Password</label>
 									<input value={user.password} onChange={this._onTextFieldChange} placeholder="Your password" id="password-id" type="password" name="password" />
 								</div>
@@ -87,7 +236,7 @@ export default class LoginForm extends Component{
 								{
 									!isLogin ? <div>
 
-											<div className="app-form-item">
+											<div className={classNames('app-form-item', {'error': _.get(error, 'confirmPassword')})}>
 												<label htmlFor="confirm-password-id">Confirm Password</label>
 												<input value={user.confirmPassword} onChange={this._onTextFieldChange} placeholder="Confirm password" id="confirm-password-id" type="password" name="confirmPassword" />
 										</div>
@@ -99,9 +248,7 @@ export default class LoginForm extends Component{
 										<button className="app-button primary">Sign In</button>
 										<div className="app-form-description">
 											<div>Don't have an account ? <button type="button" onClick={() => {
-
 													this.setState({isLogin: false});
-
 											}} className="app-button app-button-link">Sign Up</button></div>
 											
 										</div>
