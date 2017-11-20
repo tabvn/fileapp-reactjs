@@ -7,6 +7,7 @@ import {ObjectID} from 'mongodb'
 import FileArchiver from './archiver'
 import Email from './email'
 import S3 from './s3'
+import User from './models/user'
 
 class AppRouter {
 
@@ -204,6 +205,36 @@ class AppRouter {
                 return archiver;
 
             })
+        });
+
+
+        // Create new users post
+
+        app.post('/api/users', (req, res, next) => {
+
+
+            const body = _.get(req, 'body');
+
+            console.log("Data from fontend posted: ", body);
+
+            const user = new User(app);
+            user.initWithObject(body).create((err, newUser) => {
+
+
+                console.log("New user created with error & callback", err, newUser);
+
+
+
+                if(err){
+                    return res.status(503).json({
+                        error: {message: "An error creating new user account."}
+                    });
+                }
+                return res.status(200).json(newUser);
+            });
+
+
+
         });
 
 

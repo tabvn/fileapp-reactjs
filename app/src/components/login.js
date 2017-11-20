@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import classNames from 'classnames'
 import _ from 'lodash'
 import {isEmail} from '../helpers/email'
-
+import {createUser} from '../helpers/user'
 
 export default class LoginForm extends Component{
 
@@ -170,7 +170,18 @@ export default class LoginForm extends Component{
 
 				if(isValid){
 
-					// do send this data to backend.
+					// send request to backend
+					if(isLogin){
+						// do send data for login endpoint
+					}else{
+
+						createUser(this.state.user).then((response) => {
+
+							console.log("Hey i got data after send post", response);
+						});
+					}
+					
+
 				}
 				//console.log("FOrm is submitted as: ", isLogin  ? "Login" : "Register", 'data:', user);
 

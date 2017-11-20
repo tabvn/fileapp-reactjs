@@ -86,6 +86,7 @@ connect((err, db) => {
         throw (err);
     }
 
+    app.db = db;
     app.set('db', db);
 
 
