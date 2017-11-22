@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import classNames from 'classnames'
 import _ from 'lodash'
 import {isEmail} from '../helpers/email'
-import {createUser} from '../helpers/user'
+import {createUser, login} from '../helpers/user'
 
 export default class LoginForm extends Component{
 
@@ -10,6 +10,7 @@ export default class LoginForm extends Component{
 		super(props);
 
 		this.state = {
+			message: null,
 			isLogin: true,
 			user: {
 				name: "",
@@ -173,6 +174,33 @@ export default class LoginForm extends Component{
 					// send request to backend
 					if(isLogin){
 						// do send data for login endpoint
+
+						login(this.state.user.email, this.state.user.password).then((response) => {
+
+							/// login success
+
+							this.setState({
+								message: {
+									type: 'success',
+									message: 'Login successful.'
+								}
+							});
+
+
+						}).catch((err) => {
+
+
+							// login not suscess.
+							this.setState({
+								message: {
+									type: 'error',
+									message: 'An error login!'
+								}
+							});
+							console.log(err);
+						})
+
+
 					}else{
 
 						createUser(this.state.user).then((response) => {
@@ -208,7 +236,7 @@ export default class LoginForm extends Component{
 	}
 	render(){
 
-		const {isLogin, user, error} = this.state;
+		const {isLogin, user, error,message} = this.state;
 
 		const title = isLogin ? 'Sign In' : 'Sign Up'
 		return (
@@ -224,6 +252,12 @@ export default class LoginForm extends Component{
 							}} className="app-dismiss-button">Close</button>
 							<h2 className="form-title">{title}</h2>
 							<form onSubmit={this._onSubmit}>
+
+								{
+									message ? <div className="app-message">
+										<p className={message.type}>{message.message}</p>
+									</div>: null
+								}
 
 								{
 									!isLogin ? <div>

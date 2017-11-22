@@ -524,3 +524,17 @@ a{
 .user-signin-button{
   cursor: pointer;
 }
+.app-message{
+
+  p{
+    padding: 10px;
+    border: 1px solid $primary-color;
+    border-radius: 5px;
+    margin: 10px 0;
+    color: $primary-color;
+    &.error{
+      border-color: $danger-color;
+      color: $danger-color;
+    }
+  }
+}

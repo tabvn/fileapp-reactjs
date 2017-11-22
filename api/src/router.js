@@ -8,6 +8,7 @@ import FileArchiver from './archiver'
 import Email from './email'
 import S3 from './s3'
 import User from './models/user'
+import Auth from './models/auth'
 
 class AppRouter {
 
@@ -212,6 +213,7 @@ class AppRouter {
 
         app.post('/api/users', (req, res, next) => {
 
+        
 
             const body = _.get(req, 'body');
 
@@ -236,6 +238,82 @@ class AppRouter {
 
         });
 
+
+        // Login user 
+
+        app.post('/api/users/login', (req, res, next) => {
+
+            const body = _.get(req, 'body', {});
+
+            const user = new User(app);
+
+            const email = _.get(body, 'email');
+            const password = _.get(body, 'password');
+
+
+            user.login(email, password, (err, token) => {
+
+                    if(err){
+
+                        return res.status(401).json({
+                            message: "An error login your account. Please try again!"
+                        });
+                    }
+
+                    return res.status(200).json(token);
+            });
+
+
+            
+
+        });
+
+        // get my profile detail
+        app.get('/api/users/:id', (req, res, next) => {
+
+
+
+            const auth = new Auth(app);
+
+            auth.checkAuth(req, (isLoggedIn) => {
+
+
+                if(!isLoggedIn){
+
+                    return res.status(401).json({
+                        message: "Unauthorized"
+                    });
+                }
+
+
+                const userId = _.get(req, 'params.id', null);
+
+                const user = new User(app).findById(userId, (err, obj) => {
+
+
+                        if(err){
+
+                            return res.status(404).json({
+                                message: "User not found."
+                            });
+                        }
+
+                        return res.status(200).json(obj);
+
+                 });
+
+
+
+            });
+
+            
+
+
+
+            
+
+
+        });
 
     }
 

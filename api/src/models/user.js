@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import bcrypt from 'bcrypt'
-
+import Auth from './auth'
+import {ObjectID} from 'mongodb'
 
 const saltRounds = 10;
 
@@ -24,8 +25,109 @@ export default class User{
 
 
 		this.findUserByEmail = this.findUserByEmail.bind(this);
+		this.login = this.login.bind(this);
+		this.findById = this.findById.bind(this);
 	}
 
+
+	findById(id = null, cb = () => {}){
+
+
+		const db = this.app.db;
+
+		const query = {
+			_id: new ObjectID(id)
+		}
+		db.collection('users').find(query).limit(1).toArray((err, result) => {
+
+			const user = _.get(result, '[0]');
+			if(err === null && user){
+
+				delete user.password;
+				
+				return cb(null, user);
+			}
+
+			const error = {message: "User not found."}
+			return cb(error, null);
+		})
+	}
+	login(email, password, callback = () => {}){
+
+		const app = this.app;
+
+		let error = null;
+		let user = {name: "A", email: "test@gmail.com"};
+
+		console.log("Email: ", email, "password:", password);
+
+		if(!email || !password){
+
+			error = {message: "Email or password is required."};
+			return callback(error, null);
+		}
+
+		this.findUserByEmail(email, (err, user) => {
+
+
+			if(err === null && user){
+
+			
+
+				const passwordCheck = bcrypt.compareSync(password, user.password); // false
+
+			
+
+				if(passwordCheck){
+
+					// create new token and return this token key for user and use it for later request.
+					const auth = new Auth(app);
+
+
+					auth.createToken(user, null, (err, token) => {
+
+
+				
+
+						if(err){
+
+							error = {message: "An error login your account"};
+							return cb(error, null);
+						}
+
+						delete user.password;
+						token.user = user;
+						return callback(null, token);
+
+					});
+
+
+					
+				}else{
+
+					error = {message: "Password does not match."};
+
+					return callback(error, null);
+
+				}
+
+				
+
+			}
+			if(err || !user){
+				error = {message: "An error login your account"};
+
+				return callback(error, null);
+			}
+
+
+
+
+
+		});
+
+		
+	}
 
 	initWithObject(obj){
 

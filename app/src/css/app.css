@@ -495,4 +495,14 @@ a {
 .user-signin-button {
   cursor: pointer; }
 
+.app-message p {
+  padding: 10px;
+  border: 1px solid #1b65f6;
+  border-radius: 5px;
+  margin: 10px 0;
+  color: #1b65f6; }
+  .app-message p.error {
+    border-color: #d0152e;
+    color: #d0152e; }
+
 /*# sourceMappingURL=app.css.map */
