@@ -29,6 +29,7 @@
   "dependencies": {
     "archiver": "^2.1.0",
     "aws-sdk": "^2.141.0",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",

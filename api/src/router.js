@@ -224,10 +224,9 @@ class AppRouter {
                 console.log("New user created with error & callback", err, newUser);
 
 
-
                 if(err){
                     return res.status(503).json({
-                        error: {message: "An error creating new user account."}
+                        error: {message: err}
                     });
                 }
                 return res.status(200).json(newUser);
